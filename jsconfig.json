@@ -1,7 +1,17 @@
 {
   "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@components/*": ["src/components/*"],
+      "@modules/*": ["src/modules/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@api": ["src/api/index"],
+      "@styles/*": ["styles/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@redux/*": ["src/redux/*"]
+
     }
   }
 }

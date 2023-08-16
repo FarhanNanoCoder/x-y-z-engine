@@ -1,9 +1,7 @@
 import Page from "@components/hoc/secure";
+import Record from "@modules/record";
 import React from "react";
-import Entrance from "@modules/entrance";
 
 export default Page(() => {
-  return (
-    <Entrance/>
-  );
+  return <Record />;
 });
