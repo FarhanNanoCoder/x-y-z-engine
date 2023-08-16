@@ -1,0 +1,19 @@
+GET http://localhost:3000/api/record?count=10&page=1&sort_order=asc&sort_by=name
+
+####
+
+POST http://localhost:3000/api/record
+Content-Type: application/json
+
+{
+    "name":"Oil rig 1",
+    "desc":"Oil rig 1 description",
+    "client":"Farhan",
+    "contractor":"KUET",
+    "max_x":58,
+    "max_y":11,
+    "max_z":12,
+    "min_x":18,
+    "min_y":7,
+    "min_z":8
+}
