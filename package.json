@@ -8,12 +8,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "less": "lessc --js src/antd-theme/antd-customized.less src/antd-theme/antd-customized.css"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.8.3",
     "autoprefixer": "10.4.15",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.9",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.16",
@@ -33,6 +35,7 @@
   "devDependencies": {
     "concurrently": "^8.2.0",
     "dotenv": "^16.0.3",
+    "less": "^4.2.0",
     "nodemon": "^2.0.21"
   }
 }

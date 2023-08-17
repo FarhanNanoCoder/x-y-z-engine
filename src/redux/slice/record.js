@@ -1,10 +1,17 @@
+import { getCookie } from "@helpers/session";
 import { responseTransformer } from "@helpers/util";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const recordApiSlice = createApi({
   reducerPath: "record",
+  credentials: "same-origin", 
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    prepareHeaders: (headers, { getState }) => {
+      headers.set("accesstoken", "test-token");
+      headers.set('Access-Control-Allow-Origin', '*')
+      return headers;
+    },
   }),
   tagTypes: ["list-record"],
 
@@ -12,7 +19,7 @@ export const recordApiSlice = createApi({
     getRecordList: builder.query({
       transformResponse: (res) => responseTransformer({ res }),
       query: (params) => ({
-        url: `/api/record`,
+        url: `/record`,
         method: "GET",
         params: params,
       }),
@@ -20,7 +27,7 @@ export const recordApiSlice = createApi({
     }),
     getRecord: builder.query({
       query: (_id) => ({
-        url: `/api/record/${_id}`,
+        url: `/record/${_id}`,
         method: "GET",
       }),
       providesTags: ["list-record"],
@@ -28,7 +35,7 @@ export const recordApiSlice = createApi({
     createRecord: builder.mutation({
       transformResponse: (res) => responseTransformer({ res }),
       query: (body) => ({
-        url: "/api/record",
+        url: "/record",
         method: "POST",
         body: body,
       }),
@@ -37,7 +44,7 @@ export const recordApiSlice = createApi({
     updateRecord: builder.mutation({
       transformResponse: (res) => responseTransformer({ res }),
       query: ({ _id, body }) => ({
-        url: `/api/record/${_id}`,
+        url: `/record/${_id}`,
         method: "PATCH",
         body: body,
       }),
@@ -45,7 +52,7 @@ export const recordApiSlice = createApi({
     }),
     deleteRecord: builder.mutation({
       query: (id) => ({
-        url: `/api/record/${_id}`,
+        url: `/record/${_id}`,
         method: "DELETE",
         // body: { id },
       }),
