@@ -14,6 +14,7 @@ const ListViewRecord = ({ onUpdateSortQuery, onItemActionSelect }) => {
     isFetching,
   } = useGetRecordListQuery(router.query, {
     refetchOnMountOrArgChange: true,
+    fixedCacheKey: "shared-record-update-mutation",
   });
 
   const columns = [

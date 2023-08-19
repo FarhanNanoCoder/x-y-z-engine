@@ -233,7 +233,7 @@ const SearchPanelRecord = ({
                 backgroundColor: "#DAB033",
                 borderColor: "#DAB033",
               }}
-              onClick={() => {}}
+              onClick={()=>onExport({type:"excel"})}
             >
               Export to CSV
             </Button>
