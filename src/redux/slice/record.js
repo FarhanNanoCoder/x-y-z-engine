@@ -6,7 +6,7 @@ export const recordApiSlice = createApi({
   reducerPath: "record",
   credentials: "same-origin", 
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    baseUrl: process.env.NEXT_PUBLIC_API_BACKEND_HOST_URL,
     prepareHeaders: (headers, { getState }) => {
       headers.set("accesstoken", "test-token");
       headers.set('Access-Control-Allow-Origin', '*')

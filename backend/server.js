@@ -30,10 +30,11 @@ app.use(express.json(), (err, req, res, next) => {
     next();
   }
 });
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/record", recordRouter);
 
-app.listen(process.env.NEXT_PUBLIC_BACKEND_HOST_PORT, () => {
+app.listen(process.env.NEXT_PUBLIC_API_BACKEND_HOST_PORT, () => {
   console.log("Server is running on port 3000");
 });
