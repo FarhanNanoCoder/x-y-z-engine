@@ -1,4 +1,4 @@
-import "@styles/globals.css";
+import "@styles/index.css";
 import { IconoirProvider } from "iconoir-react";
 import { store } from "@redux/store";
 import { Provider } from "react-redux";

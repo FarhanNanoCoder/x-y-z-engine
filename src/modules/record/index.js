@@ -87,7 +87,7 @@ const Record = ({ base = "/record" }) => {
   };
 
   return (
-    <div>
+    <div className="record-parent">
       <SearchPanelRecord onCreate={onCreate} />
       <ListViewRecord
         onItemActionSelect={onItemActionSelect}
