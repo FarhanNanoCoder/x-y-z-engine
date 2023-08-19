@@ -21,7 +21,7 @@ export const showAlertDialog = ({
     //   </div>
     // ),
 
-    icon:<></>,
+    // icon:<QuestionMarkCircle style={{color:"orangered"}}/>,
     onOk() {
       onConfirm(item,extra);
     },

@@ -217,12 +217,14 @@ const SearchPanelRecord = ({
               </Button>
             )}
           </Col>
+        </Row>
+        <Row gutter={[16, 12]} justify="end">
           <Col xs={24} sm={12} md={8} xl={4}>
             <Button type="primary" style={{ width: "100%" }} onClick={onCreate}>
               Create
             </Button>
           </Col>
-         
+
           <Col xs={24} sm={12} md={8} xl={4}>
             <Button
               style={{

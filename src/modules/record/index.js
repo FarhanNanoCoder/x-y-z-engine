@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import COERecord from "./COE-Record";
 import { useDeleteRecordMutation } from "@redux/slice/record";
-import { Modal, message } from "antd";
+import { Card, Modal, message } from "antd";
 import { showAlertDialog } from "@components/core/AlertDialog";
+import { AddDatabaseScript } from "iconoir-react";
 
 const Record = ({ base = "/record" }) => {
   const dispatch = useDispatch();
@@ -28,9 +29,7 @@ const Record = ({ base = "/record" }) => {
         resultDeleteRecord?.data?.message ?? "Operation is successfull"
       );
     } else if (resultDeleteRecord?.isError) {
-      message.error(
-        resultDeleteRecord?.data?.message ?? "Operation failed"
-      );
+      message.error(resultDeleteRecord?.data?.message ?? "Operation failed");
     }
   }, [resultDeleteRecord]);
 
@@ -88,13 +87,26 @@ const Record = ({ base = "/record" }) => {
 
   return (
     <div className="record-parent">
-      <SearchPanelRecord onCreate={onCreate} />
-      <ListViewRecord
-        onItemActionSelect={onItemActionSelect}
-        onUpdateSortQuery={({ sort_by }) =>
-          handleSortQuery({ sort_by, router: router, base: base })
+      <Card
+        size="sm"
+        title={
+          <div style={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
+            <AddDatabaseScript />
+            <h3>Record</h3>
+          </div>
         }
-      />
+      >
+        <SearchPanelRecord onCreate={onCreate} />
+      </Card>
+      <br />
+      <Card size="sm">
+        <ListViewRecord
+          onItemActionSelect={onItemActionSelect}
+          onUpdateSortQuery={({ sort_by }) =>
+            handleSortQuery({ sort_by, router: router, base: base })
+          }
+        />
+      </Card>
       {showEditModal && (
         <COERecord _id={itemToBeShown} onClose={onCloseModal} />
       )}
