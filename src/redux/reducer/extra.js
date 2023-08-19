@@ -21,14 +21,14 @@ import {
         }
       },
     },
-    extraReducers: (builder) => {
+    // extraReducers: (builder) => {
       
-      builder.addMatcher(isRejected, (state, action) => {
-        // state.orderLoader = false;
-        message.error(action.error.message);
+    //   builder.addMatcher(isRejected, (state, action) => {
+    //     // state.orderLoader = false;
+    //     message.error(action.error.message);
     
-      });
-    },
+    //   });
+    // },
   });
   
   export const {  setHeadTitle } = extraSlice.actions;

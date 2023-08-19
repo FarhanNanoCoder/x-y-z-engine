@@ -1,9 +1,10 @@
-import { Table, Space, Tooltip } from "antd";
+import { Table, Space, Tooltip, message } from "antd";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 import { useGetRecordListQuery } from "@redux/slice/record";
 import SortableTableHeader from "@components/core/SortableTableHeader";
 import { toQueryString } from "@helpers/util";
+import { useEffect } from "react";
 
 const ListViewRecord = ({ onUpdateSortQuery, onItemActionSelect }) => {
 
@@ -12,10 +13,18 @@ const ListViewRecord = ({ onUpdateSortQuery, onItemActionSelect }) => {
     data: recordData,
     isLoading: recordLoader,
     isFetching,
+    error,
   } = useGetRecordListQuery(router.query, {
     refetchOnMountOrArgChange: true,
     fixedCacheKey: "shared-record-update-mutation",
   });
+
+  useEffect(()=>{
+    
+    if(error){
+      message.error((error?.data?.message || error?.error )?? "Operation failed");
+    }
+  },[error])
 
   const columns = [
     {

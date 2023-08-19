@@ -39,7 +39,7 @@ const Record = ({ base = "/record" }) => {
         resultDeleteRecord?.data?.message ?? "Operation is successfull"
       );
     } else if (resultDeleteRecord?.isError) {
-      message.error(resultDeleteRecord?.data?.message ?? "Operation failed");
+      message.error(resultDeleteRecord?.error?.message ?? "Operation failed");
     }
   }, [resultDeleteRecord]);
 

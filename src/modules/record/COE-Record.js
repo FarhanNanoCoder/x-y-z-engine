@@ -39,7 +39,7 @@ const COERecord = ({ _id, onClose }) => {
   const [
     createRecord,
     {
-      data: recordDataCreate,
+      data: dataCreating,
       isLoading: isCreating,
       error: errorCreating,
       isSuccess: successCreating,
@@ -48,7 +48,7 @@ const COERecord = ({ _id, onClose }) => {
   const [
     updateRecord,
     {
-      data: recordDataUpdate,
+      data: dataUpdating,
       isLoading: isUpdating,
       error: errorUpdating,
       isSuccess: successUpdating,
@@ -68,20 +68,24 @@ const COERecord = ({ _id, onClose }) => {
 
   useEffect(() => {
     if (errorCreating || errorUpdating || errorFetching) {
+      console.log("error", errorCreating);
       message.error(
-        recordDataCreate?.data?.message ||
-          recordDataUpdate?.data?.message ||
-          data?.data?.message
+        errorCreating?.data?.message ||
+          errorUpdating?.data?.message ||
+          errorFetching?.data?.message ||
+          errorCreating?.error ||
+          errorUpdating?.error ||
+          errorFetching?.error
       );
     }
   }, [errorCreating, errorUpdating, errorFetching]);
 
   useEffect(() => {
     if (successCreating) {
-      message.success(recordDataCreate?.data?.message);
+      message.success(dataCreating?.message);
       onClose();
     } else if (successUpdating) {
-      message.success(recordDataUpdate?.data?.message);
+      message.success(dataUpdating?.message);
       onClose();
     }
   }, [successCreating, successUpdating]);
@@ -103,7 +107,7 @@ const COERecord = ({ _id, onClose }) => {
 
   const onFileChange = (info) => {
     if (info.file.status === "done") {
-      console.log("file transferred", info);
+      // console.log("file transferred", info);
       if (info?.fileList?.length !== 0) {
         Papa.parse(info.file.originFileObj, {
           complete: (res) => {
@@ -160,7 +164,7 @@ const COERecord = ({ _id, onClose }) => {
     <Drawer
       width="100%"
       centered
-      title="Record"
+      title={`Record ${_id ? "(Update)" : "(Create)"}`}
       open={true}
       extra={[
         <Button
