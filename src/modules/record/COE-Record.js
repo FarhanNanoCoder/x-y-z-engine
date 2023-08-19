@@ -22,8 +22,11 @@ import {
 } from "@redux/slice/record";
 import Papa from "papaparse";
 import ChartRecord from "./Chart-Record";
+import { useDispatch } from "react-redux";
+import { setHeadTitle } from "@redux/reducer/extra";
 
 const COERecord = ({ _id, onClose }) => {
+  const dispatch = useDispatch();
   const {
     data,
     isLoading: isFetching,
@@ -35,32 +38,50 @@ const COERecord = ({ _id, onClose }) => {
   });
   const [
     createRecord,
-    { isLoading: isCreating, error: errorCreating, isSuccess: successCreating },
+    {
+      data: recordDataCreate,
+      isLoading: isCreating,
+      error: errorCreating,
+      isSuccess: successCreating,
+    },
   ] = useCreateRecordMutation();
   const [
     updateRecord,
-    { isLoading: isUpdating, error: errorUpdating, isSuccess: successUpdating },
+    {
+      data: recordDataUpdate,
+      isLoading: isUpdating,
+      error: errorUpdating,
+      isSuccess: successUpdating,
+    },
   ] = useUpdateRecordMutation();
   const [form] = Form.useForm();
-  const [state, setState] = useState(0); //0 = first step, 1 = second step
+  const [state, setState] = useState(!_id ? 0 : 1); //0 = first step, 1 = second step
   const [fileData, setFileData] = useState([]);
 
-  // useEffect(() => {
-
-  // }, []);
+  useEffect(() => {
+    if (_id) {
+      dispatch(setHeadTitle("Update record"));
+    } else {
+      dispatch(setHeadTitle("Create record"));
+    }
+  }, []);
 
   useEffect(() => {
     if (errorCreating || errorUpdating || errorFetching) {
-      // message.error(errorCreating || errorUpdating || errorFetching);
+      message.error(
+        recordDataCreate?.data?.message ||
+          recordDataUpdate?.data?.message ||
+          data?.data?.message
+      );
     }
   }, [errorCreating, errorUpdating, errorFetching]);
 
   useEffect(() => {
     if (successCreating) {
-      message.success("Succesfully created Record");
+      message.success(recordDataCreate?.data?.message);
       onClose();
     } else if (successUpdating) {
-      message.success("Succesfuly updated Record");
+      message.success(recordDataUpdate?.data?.message);
       onClose();
     }
   }, [successCreating, successUpdating]);
@@ -106,12 +127,10 @@ const COERecord = ({ _id, onClose }) => {
               min_y = Math.min(min_y, Number(res?.data[i][2]));
               max_z = Math.max(max_z, Number(res?.data[i][3]));
               min_z = Math.min(min_z, Number(res?.data[i][3]));
-              // console.log("max_x", max_x, "min_x", min_x, "max_y", max_y, "min_y", min_y, "max_z", max_z, "min_z", min_z)
             }
-            // res?.data?.splice(0, 1);
+
             setFileData(res?.data);
             form.setFieldsValue({ max_x, min_x, max_y, min_y, max_z, min_z });
-            // console.log("res", res);
           },
           error: (error) => {
             message.error(error?.toString());
@@ -119,11 +138,6 @@ const COERecord = ({ _id, onClose }) => {
         });
       }
     }
-    // const workbook = xlsx.read(info.file.originFileObj, { type: "array" });
-    // const sheetName = workbook.SheetNames[0];
-    // const worksheet = workbook.Sheets[sheetName];
-    // const json = xlsx.utils.sheet_to_json(worksheet);
-    // console.log(json);
   };
 
   const processRecordData = (data) => {
@@ -160,9 +174,9 @@ const COERecord = ({ _id, onClose }) => {
           {_id ? "Update" : "Create"}
         </Button>,
       ]}
-      onCancel={() => {
+      onClose={() => {
         onClose();
-        // dispatch(setHeadTitle("Record"));
+        dispatch(setHeadTitle("Record"));
         form.resetFields();
       }}
       // footer={[

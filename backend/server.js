@@ -16,7 +16,7 @@ db.once("open", () => console.log("Connected to Database"));
 
 app.use(
   cors({
-    origin: "http://localhost:3001",
+    origin: process.env.NEXT_PUBLIC_FRONTEND_HOST_URL,
   })
 );
 app.use(express.json(), (err, req, res, next) => {

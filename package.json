@@ -5,9 +5,9 @@
   "main": "backend/server.js",
   "scripts": {
     "server": "nodemon backend/server.js",
-    "dev": "next dev",
+    "dev": "concurrently \"nodemon backend/server.js\" \"next dev -p 4000\"",
     "build": "next build",
-    "start": "next start",
+    "start": "next start next dev -p 4000",
     "lint": "next lint",
     "less": "lessc --js src/antd-theme/antd-customized.less src/antd-theme/antd-customized.css"
   },

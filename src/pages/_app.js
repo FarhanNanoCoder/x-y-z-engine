@@ -3,6 +3,7 @@ import { IconoirProvider } from "iconoir-react";
 import { store } from "@redux/store";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
+import TitleWrapLayout from "src/layout/TitleWrapLayout";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -10,7 +11,7 @@ export default function App({ Component, pageProps }) {
       theme={{
         token: {
           colorPrimary: "#00A368",
-          
+
           fontFamily: "Poppins, sans-serif",
           // paddingLG: "24px",
           // paddingMD: "16px",
@@ -35,7 +36,9 @@ export default function App({ Component, pageProps }) {
             height: "1rem",
           }}
         >
-          <Component {...pageProps} />
+          <TitleWrapLayout>
+            <Component {...pageProps} />
+          </TitleWrapLayout>
         </IconoirProvider>
       </Provider>
     </ConfigProvider>
