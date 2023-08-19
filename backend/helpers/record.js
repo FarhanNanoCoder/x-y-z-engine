@@ -11,21 +11,13 @@ module.exports = {
       return null;
     }
   },
-  updateRecord: async ({ _id }, body) => {
+  updateRecord: async (filter, body) => {
     try {
-      let record = await Record.findById(_id);
-      if (record) {
-        await record.updateOne({ _id: _id }, body, {
-          new: true,
-          runValidators: true,
-        });
-        return {
-          ...record?._doc,
-          ...body,
-        };
-      } else {
-        throw Error("record not found");
-      }
+      const updated = await Record.findOneAndUpdate(filter, body, {
+        new: true,
+        runValidators: true,
+      });
+      return updated;
     } catch (error) {
       console.log(error.message);
       throw error;

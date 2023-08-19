@@ -19,6 +19,18 @@ app.use(
     origin: "http://localhost:3001",
   })
 );
+app.use(express.json(), (err, req, res, next) => {
+  if (err) {
+    res.status(400).json({
+      code: 400,
+      status: "failed",
+      msg: "Invalid JSON body",
+    });
+  } else {
+    next();
+  }
+});
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/record", recordRouter);
 

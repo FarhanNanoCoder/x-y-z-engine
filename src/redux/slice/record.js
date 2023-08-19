@@ -33,7 +33,7 @@ export const recordApiSlice = createApi({
       providesTags: ["list-record"],
     }),
     createRecord: builder.mutation({
-      transformResponse: (res) => responseTransformer({ res }),
+      // transformResponse: (res) => responseTransformer({ res }),
       query: (body) => ({
         url: "/record",
         method: "POST",
@@ -42,7 +42,7 @@ export const recordApiSlice = createApi({
       invalidatesTags: ["list-record"],
     }),
     updateRecord: builder.mutation({
-      transformResponse: (res) => responseTransformer({ res }),
+      // transformResponse: (res) => responseTransformer({ res }),
       query: ({ _id, body }) => ({
         url: `/record/${_id}`,
         method: "PATCH",
@@ -51,7 +51,7 @@ export const recordApiSlice = createApi({
       invalidatesTags: ["list-record"],
     }),
     deleteRecord: builder.mutation({
-      query: (id) => ({
+      query: (_id) => ({
         url: `/record/${_id}`,
         method: "DELETE",
         // body: { id },

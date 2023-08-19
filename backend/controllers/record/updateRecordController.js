@@ -1,7 +1,8 @@
 const { updateRecord } = require("../../helpers/record");
 
 module.exports = updateRecordController = async (req, res, next) => {
-  let keys = Object.keys(req.body);
+  console.log("req", req?.body);
+  let keys = Object.keys(req?.body ?? []);
   let validKeys = [
     "name",
     "client",
@@ -14,15 +15,19 @@ module.exports = updateRecordController = async (req, res, next) => {
     "min_z",
     "desc",
   ];
+  let immutableKeys = ["createdAt", "_id"];
 
   try {
     if (keys.length === 0) {
       throw new Error("No data provided");
     }
     keys.forEach((key) => {
-      if (!validKeys.includes(key)) {
+      if (!validKeys.includes(key) && !immutableKeys.includes(key)) {
         throw Error(`Invalid key: ${key}`);
       }
+    });
+    immutableKeys?.forEach((key) => {
+      req?.body[key]!=null && delete req?.body[key];
     });
 
     const record = await updateRecord({ _id: req.params?._id }, req.body);

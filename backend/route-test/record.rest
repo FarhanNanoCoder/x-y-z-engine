@@ -17,3 +17,19 @@ Content-Type: application/json
     "min_y":7,
     "min_z":8
 }
+####
+PATCH http://localhost:3000/api/record/64dcee9c95f181ddaa74fbde
+Content-Type: application/json
+
+{
+    "name":"Oil rig 1",
+    "desc":"Oil rig 1 description",
+    "client":"Farhan",
+    "contractor":"KUET",
+    "max_x":56,
+    "max_y":11,
+    "max_z":12,
+    "min_x":18,
+    "min_y":7,
+    "min_z":8
+}
