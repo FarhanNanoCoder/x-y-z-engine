@@ -112,7 +112,7 @@ const SearchPanelRecord = ({
               }}
             />
           </Col>
-          <Col xs={24} sm={12} md={2} xl={2}>
+          {/* <Col xs={24} sm={12} md={2} xl={2}>
             <DebounceInput
               syncWithRouter
               type="number"
@@ -155,7 +155,7 @@ const SearchPanelRecord = ({
                 updateQuery({ key: "y_min", value });
               }}
             />
-          </Col>
+          </Col> */}
           <Col xs={24} sm={12} md={4} xl={4}>
             <Tooltip title="Date from">
               <DatePicker
