@@ -14,6 +14,7 @@ import { showAlertDialog } from "@components/core/AlertDialog";
 import { AddDatabaseScript } from "iconoir-react";
 import * as XLSX from "xlsx-js-style";
 import dayjs from "dayjs";
+import DetailsRecord from "./Details-Record";
 
 const Record = ({ base = "/record" }) => {
   const dispatch = useDispatch();
@@ -205,6 +206,9 @@ const Record = ({ base = "/record" }) => {
       </Card>
       {showEditModal && (
         <COERecord _id={itemToBeShown} onClose={onCloseModal} />
+      )}
+      {showViewModal && (
+        <DetailsRecord _id={itemToBeShown} onClose={onCloseModal} />
       )}
     </div>
   );
